@@ -5,14 +5,16 @@ from pyspark import SparkContext, SparkConf
 
 
 def  dividirYTarjeta (linea):
+    array =[]
     nombre, metodo, importe = linea.split(";")
     if(metodo == "Tarjeta de crédito"):
-        return nombre, importe
+        array.append((nombre, importe))
+    return array
 
 def obtenerSuma(val1, val2):
     return val1+val2
 
-    
+
 
 conf = SparkConf().setMaster("local").setAppName("mi programa")
 sc = SparkContext(conf = conf)
