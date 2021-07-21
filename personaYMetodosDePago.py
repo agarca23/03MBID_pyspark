@@ -23,7 +23,7 @@ def  dividirYTarjetaMenos1500 (linea):
 
 
 def obtenerSuma(val1, val2):
-    return float(val1)+float(val2)
+    return int(val1)+int(val2)
 
 def formatearSalida(tupla):
 	return tupla[0]+";"+str(tupla[1])
@@ -41,6 +41,6 @@ datosEntrada = sc.textFile(entrada)
 gastoTarjetaMas1500 = datosEntrada.flatMap(dividirYTarjetaMas1500).reduceByKey(obtenerSuma).map(formatearSalida)
 gastoTarjetaMas1500.saveAsTextFile(salida+"/comprasCreditoMayorDe1500")
 
-gastoTarjetaMenos1500 = datosEntrada.flatMap(dividirYTarjetaMas1500).reduceByKey(obtenerSuma).map(formatearSalida)
-gastoTarjetaMas1500.saveAsTextFile(salida+"/comprasCreditoMenorDe1500")
+gastoTarjetaMenos1500 = datosEntrada.flatMap(dividirYTarjetaMenos1500).reduceByKey(obtenerSuma).map(formatearSalida)
+gastoTarjetaMenos1500.saveAsTextFile(salida+"/comprasCreditoMenorDe1500")
 
