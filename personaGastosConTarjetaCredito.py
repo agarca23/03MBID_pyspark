@@ -12,9 +12,10 @@ def  dividirYTarjeta (linea):
     return array
 
 def obtenerSuma(val1, val2):
-    return val1+val2
+    return float(val1)+float(val2)
 
-
+def formatearSalida(tupla):
+	return tupla[0]+";"+str(tupla[1])
 
 conf = SparkConf().setMaster("local").setAppName("mi programa")
 sc = SparkContext(conf = conf)
@@ -26,5 +27,5 @@ print(salida)
 
 datosEntrada = sc.textFile(entrada)
 
-gastoTarjeta = datosEntrada.flatMap(dividirYTarjeta).reduceByKey(obtenerSuma)
+gastoTarjeta = datosEntrada.flatMap(dividirYTarjeta).reduceByKey(obtenerSuma).map(formatearSalida)
 gastoTarjeta.saveAsTextFile(salida)
